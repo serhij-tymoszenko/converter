@@ -17,7 +17,7 @@ private fun correctSvg(lines: MutableList<String>) {
 
 private fun addClasses(lines: MutableList<String>): MutableList<String> {
     var clsIndex = 0
-    var classes = mutableMapOf<Int, String>()
+    val classes = mutableMapOf<Int, String>()
     val newLines = lines.map { line: String ->
         if (line.contains(Regex("style=\"*\""))) {
             val startIndex = line.indexOfLast { c -> c == '=' } + 2
@@ -64,7 +64,6 @@ private fun rgbSubstrToHex(substr: String): String {
 }
 
 fun convert(file: File): String {
-    var classes = mutableListOf<String>()
     var lines = readFile(file)
     correctSvg(lines)
     lines = addClasses(lines)

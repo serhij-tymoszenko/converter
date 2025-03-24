@@ -12,14 +12,11 @@ fun main() = application {
     FileKit.init(appId = "converter")
 
     LaunchedEffect(true) {
-        var contentToSave: String = ""
-
         val svg = FileKit.openFilePicker()
         svg?.let {
-            contentToSave = convert(it.file)
+            val contentToSave = convert(it.file)
+            val newSvg = FileKit.openFileSaver(suggestedName = "awesomeSvg", extension = "svg")
+            newSvg?.writeString(contentToSave)
         }
-
-        val newSvg = FileKit.openFileSaver(suggestedName = "newSvg", extension = "svg")
-        newSvg?.writeString(contentToSave)
     }
 }
